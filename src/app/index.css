@@ -36,6 +36,7 @@ body {
 
 .main-content {
   flex: 1;
+  min-width: 0;
   background: var(--bg-primary);
   display: flex;
   flex-direction: column;
@@ -50,6 +51,8 @@ body {
 /* Chart */
 .chart-container {
   flex: 1;
+  min-width: 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   min-height: 400px;
@@ -68,6 +71,8 @@ body {
 
 .chart-placeholder {
   flex: 1;
+  min-width: 0;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;

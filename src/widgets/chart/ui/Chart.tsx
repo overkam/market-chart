@@ -66,9 +66,15 @@ export function Chart({ symbol = 'BTC/USDC' }: ChartProps) {
 
     candlestickSeries.setData(candles)
 
+    const parent = container.parentElement
+    const header = parent?.querySelector('.chart-header')
+
     const updateSize = () => {
-      const width = container.clientWidth
-      const height = container.clientHeight || 400
+      if (!parent) return
+      const rect = parent.getBoundingClientRect()
+      const headerHeight = header ? (header.getBoundingClientRect().height ?? 0) : 0
+      const width = rect.width
+      const height = Math.max(0, rect.height - headerHeight) || 400
       if (width > 0 && height > 0) {
         chart.resize(width, height)
       }
@@ -78,7 +84,7 @@ export function Chart({ symbol = 'BTC/USDC' }: ChartProps) {
     window.addEventListener('resize', updateSize)
 
     const resizeObserver = new ResizeObserver(updateSize)
-    resizeObserver.observe(container)
+    if (parent) resizeObserver.observe(parent)
 
     return () => {
       window.removeEventListener('resize', updateSize)
